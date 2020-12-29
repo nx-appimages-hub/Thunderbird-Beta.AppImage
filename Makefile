@@ -21,7 +21,7 @@ all:
 
 	echo "LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}:\$${APPDIR}/thunderbird" >> $(PWD)/build/Boilerplate.AppDir/AppRun
 	echo "export LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}" >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo "exec \$${APPDIR}/thunderbird/thunderbird \"\$${@}\"" >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo "exec \$${APPDIR}/thunderbird/thunderbird -p default \"\$${@}\"" >> $(PWD)/build/Boilerplate.AppDir/AppRun
 
 	cp --force --recursive $(PWD)/build/thunderbird/* $(PWD)/build/Boilerplate.AppDir/thunderbird
 
