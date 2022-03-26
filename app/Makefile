@@ -16,14 +16,19 @@ PWD:=$(shell pwd)
 all: clean init 
 	
 	mkdir --parents $(PWD)/build/Boilerplate.AppDir/thunderbird
-	apprepo --destination=$(PWD)/build appdir boilerplate libatk1.0-0 libatk-bridge2.0-0 libgtk-3-0
+	$(PWD)/bin/Apprepo.AppImage --destination=$(PWD)/build appdir boilerplate \
+		libgdk-pixbuf2.0-0 libatk1.0-0 libatk-bridge2.0-0 libgtk2.0-0
 
 	wget --output-document="$(PWD)/build/build.tar.bz2" "https://download.mozilla.org/?product=thunderbird-beta-latest&os=linux64"
 	tar -jxvf $(PWD)/build/build.tar.bz2 -C $(PWD)/build
 
-	echo "LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}:\$${APPDIR}/thunderbird" >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo "export LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}" >> $(PWD)/build/Boilerplate.AppDir/AppRun
-	echo "exec \$${APPDIR}/thunderbird/thunderbird -p default \"\$${@}\"" >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo ''                                                                >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo ''                                                                >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo "LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}:\$${APPDIR}/thunderbird"    >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo "export LD_LIBRARY_PATH=\$${LD_LIBRARY_PATH}"                     >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo ''                                                                >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo ''                                                                >> $(PWD)/build/Boilerplate.AppDir/AppRun
+	echo "exec \$${APPDIR}/thunderbird/thunderbird -p default \"\$${@}\""  >> $(PWD)/build/Boilerplate.AppDir/AppRun
 
 	cp --force --recursive $(PWD)/build/thunderbird/* $(PWD)/build/Boilerplate.AppDir/thunderbird
 
